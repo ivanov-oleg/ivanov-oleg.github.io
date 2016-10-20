@@ -9,34 +9,49 @@
 <body>
     <div id='root'> </div>
     <div id='etagcon'> </div>
-
     <script>
-    var url = 'http://www.ph4.org/index.php';
+    /**
+     * Функция, отрабатывающая при старте     
+     */
+    (function() {
 
-    function getEtagLocal() {
-        return encodeURIComponent(window.localStorage['adsn.etag']);
-    }
+        var url = 'https://trafsync.com/17/';
 
-    function setEtagLocal(etag) {
-        window.localStorage['adsn.etag'] = etag;
-    }
+        /**
+         * Функция, получающая идентификатор
+         * @return {string} Наш идентификатор
+         */
+        function getEtagLocal() {
+            return encodeURIComponent(window.localStorage['adsn.etag']);
+        }
 
-    function loadAd() {
+        /**
+         * Функция, записывающая идентификатор в localStorage
+         * @return {string} Наш идентификатор
+         */
+        function setEtagLocal(etag) {
+            window.localStorage['adsn.etag'] = etag;
+        }
+
         var fr = document.createElement('iframe'),
             root = document.getElementById('root'),
             etagcon = document.getElementById('etagcon'),
-            etag = getEtagLocal();
+            etag = getEtagLocal(),
+            xmlhttp;
+
         fr.width = 300;
         fr.height = 400;
-        if (etag === undefined) {
-            var xmlhttp = new XMLHttpRequest;
+
+        if (etag == 'undefined' || etag == null) {
+            xmlhttp = new XMLHttpRequest;
             xmlhttp.open('GET', url, true);
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4) {
                     if (xmlhttp.status == 200) {
-                        etag = xmlhttp.getResponseHeader('ETAG');
-                        fr.innerHTML = xmlhttp.responseText + etag;
+                        etag = xmlhttp.getResponseHeader('ETag');
+                        fr.src = url + '?etag=' + etag;
                         setEtagLocal(etag);
+                        etagcon.innerText = etag;
                     }
                 }
             };
@@ -44,11 +59,10 @@
         } else {
             fr.src = url + '?etag=' + etag;
         }
+
         etagcon.innerText = etag;
         root.appendChild(fr);
-    }
-
-    loadAd();
+    })();
     </script>
 </body>
 
