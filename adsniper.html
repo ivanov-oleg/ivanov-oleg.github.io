@@ -9,71 +9,45 @@
 <body>
     <div id='root'> </div>
     <div id='etagcon'> </div>
+    <frame src=''>
+    </frame>
     <script>
+
+    var et;
+    function setEtag(val){
+        window.et = val;
+    } 
+
     /**
      * Функция, отрабатывающая при старте     
      */
     (function() {
 
-        var url = 'http://trafsync.com/17/',
+        var url = 'http://ivanov-oleg.moy.su/adsniper.html',
             fr = document.createElement('iframe'),
-            ecc = document.createElement('src'),
-            root = document.getElementById('root'),
-            etagcon = document.getElementById('etagcon'),
-            etag = getEtagLocal(),
-            xmlhttp;
-        ecc.src = 'evercookie/evercookie.js';
-        ecc.onload = function(e) {
-            var ec = new evercookie();
-            ec.set("id", "12345"); // установить
-            ec.get("id", function(value) {
-                console.log("Значение куки " + value)
-            }); // прочитать
-        }
-        document.body.appendChild(ecc);
-
-        /**
-         * Функция, получающая идентификатор
-         * @return {string} Наш идентификатор
-         */
-        function getEtagLocal() {
-            return window.localStorage['adsn.etag'];
-        }
-
-        /**
-         * Функция, записывающая идентификатор в localStorage
-         * @return {string} Наш идентификатор
-         */
-        function setEtagLocal(etag) {
-            window.localStorage['adsn.etag'] = etag;
-        }
+            root = document.getElementById('root');
 
         fr.width = 300;
-        fr.height = 400;
-
-        if (etag == 'undefined' || etag == null) {
-            xmlhttp = new XMLHttpRequest;
-            xmlhttp.open('GET', url, true);
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4) {
-                    if (xmlhttp.status == 200) {
-                        etag = xmlhttp.getResponseHeader('ETag');
-                        fr.src = url + '?etag=' + etag;
-                        if (etag) {
-                            setEtagLocal(etag);
-                            etagcon.innerText = etag;
-                        }
-
-                    }
-                }
-            };
-            xmlhttp.send(null);
-        } else {
-            fr.src = url + '?etag=' + etag;
-        }
-
-        etagcon.innerText = etag;
+        fr.height = 500;        
+        fr.src = url;     
         root.appendChild(fr);
+
+        window.addEventListener('message', function(event) { 
+
+            // IMPORTANT: Check the origin of the data! 
+            if (~event.origin.indexOf('http://yoursite.com')) { 
+                // The data has been sent from your site 
+
+                // The data sent with postMessage is stored in event.data 
+                console.log(event.data); 
+            } else { 
+                console.log(window.localStorage);
+                // The data hasn't been sent from your site! 
+                // Be careful! Do not use it. 
+                return; 
+            } 
+        }); 
+
     })();
     </script>
 </body>
