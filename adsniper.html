@@ -49,8 +49,11 @@
                     if (xmlhttp.status == 200) {
                         etag = xmlhttp.getResponseHeader('ETag');
                         fr.src = url + '?etag=' + etag;
-                        setEtagLocal(etag);
-                        etagcon.innerText = etag;
+                        if(etag) {
+                            setEtagLocal(etag);
+                            etagcon.innerText = etag;    
+                        }
+                        
                     }
                 }
             };
