@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовое задание AdSniper</title>
+</head>
+
+<body>
+    <div id='root'> </div>
+    <div id='etagcon'> </div>
+
+    <script>
+    var url = 'http://www.ph4.org/index.php';
+
+    function getEtagLocal() {
+        return encodeURIComponent(window.localStorage['adsn.etag']);
+    }
+
+    function setEtagLocal(etag) {
+        window.localStorage['adsn.etag'] = etag;
+    }
+
+    function loadAd() {
+        var fr = document.createElement('iframe'),
+            root = document.getElementById('root'),
+            etagcon = document.getElementById('etagcon'),
+            etag = getEtagLocal();
+        fr.width = 300;
+        fr.height = 400;
+        if (etag === undefined) {
+            var xmlhttp = new XMLHttpRequest;
+            xmlhttp.open('GET', url, true);
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4) {
+                    if (xmlhttp.status == 200) {
+                        etag = xmlhttp.getResponseHeader('ETAG');
+                        fr.innerHTML = xmlhttp.responseText + etag;
+                        setEtagLocal(etag);
+                    }
+                }
+            };
+            xmlhttp.send(null);
+        } else {
+            fr.src = url + '?etag=' + etag;
+        }
+        etagcon.innerText = etag;
+        root.appendChild(fr);
+    }
+
+    loadAd();
+    </script>
+</body>
+
+</html>
