@@ -15,14 +15,19 @@
      */
     (function() {
 
-        var url = 'https://trafsync.com/17/';
+        var url = 'https://js.sniperlog.ru/test/17/',
+            fr = document.createElement('iframe'),
+            root = document.getElementById('root'),
+            etagcon = document.getElementById('etagcon'),
+            etag = getEtagLocal(),
+            xmlhttp;
 
         /**
          * Функция, получающая идентификатор
          * @return {string} Наш идентификатор
          */
         function getEtagLocal() {
-            return encodeURIComponent(window.localStorage['adsn.etag']);
+            return window.localStorage['adsn.etag'];
         }
 
         /**
@@ -31,13 +36,7 @@
          */
         function setEtagLocal(etag) {
             window.localStorage['adsn.etag'] = etag;
-        }
-
-        var fr = document.createElement('iframe'),
-            root = document.getElementById('root'),
-            etagcon = document.getElementById('etagcon'),
-            etag = getEtagLocal(),
-            xmlhttp;
+        }            
 
         fr.width = 300;
         fr.height = 400;
