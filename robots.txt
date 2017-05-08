@@ -2,9 +2,9 @@ User-agent: Yandex
 Allow: /
 Disallow:
 Host: www.olivanov.ru
-Sitemap: /sitemap.xml
+Sitemap: https://olivanov.ru/sitemap.xml
 
 User-agent: Google
 Allow: /
 Disallow:
-Sitemap: /sitemap.xml
+Sitemap: https://olivanov.ru/sitemap.xml
