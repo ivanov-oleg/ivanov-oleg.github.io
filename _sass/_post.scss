@@ -85,3 +85,12 @@
             margin-right: auto
         }
     }
+
+.post-after-link {
+        display: inline-block;
+        padding: 10px !important;
+        border: 1px solid #666;
+        border-radius: 4px;
+        color: #eee !important;
+        background: #777;
+    }

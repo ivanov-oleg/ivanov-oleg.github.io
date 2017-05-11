@@ -19,10 +19,13 @@ layout: default
 
           {{ post.content | split: '<!-- more -->' | first }}
           <br>
-          <span class="disqus-comment-count" data-disqus-url="{{ site.urlglobal }}{{ post.url }}"> <!-- Count will be inserted here --> </span>
-          {% if post.content contains '<!-- more -->' %}
-              <a href="{{ post.url }}">Далее &raquo;</a>
-          {% endif %}
+          <div class="post-after">
+            <a class="disqus-comment-count post-after-link" data-disqus-url="{{ site.urlglobal }}{{ post.url }}" href="{{ post.url }}#disqus_thread"></a>
+            {% if post.content contains '<!-- more -->' %}
+                <a class="post-after-link" href="{{ post.url }}">Далее &raquo;</a>
+            {% endif %}
+          </div>
+
 
 
         </div>
