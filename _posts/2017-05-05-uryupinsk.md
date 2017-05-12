@@ -3,6 +3,7 @@ layout: post
 title:  "Что ты забыл в Урюпинске?"
 date:   2017-04-12 08:00:00 +0300
 categories: things
+permalink: /things/urup
 sitemap:
     priority: 0.7
     changefreq: 'monthly'
