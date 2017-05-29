@@ -26,6 +26,7 @@
                 text-decoration: none;
                 font-size: $base-font-size;
                 line-height: $base-font-size * 2;
+			padding:0 14px;
         }
         .site-nav {
                 text-align:right;
@@ -173,9 +174,9 @@
 // footer
 .footer {
         padding: 60px 0;
-        background-color: #e0e0e3;
+        background-color: #000;
         text-align:center;
-        color:#666;
+        color:#fff;
         font-size:$small-font-size;
 }
 
