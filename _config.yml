@@ -23,7 +23,7 @@ urlglobal: "https://olivanov.ru"
 github_username: ivanov-oleg
 avatar: https://www.gravatar.com/avatar/9554a746591e37cd2889c5ed3439648e?size=200?default=mm
 disqus_shortname: "olivanov-ru"
-telegram: "oliivanov"
+telegram: "lamposhka"
 gems:
  - jekyll-paginate
  - jekyll-gist
