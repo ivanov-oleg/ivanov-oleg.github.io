@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "Великолепная пятерка: книги"
-date:   2018-01-19 07:00:00 +0300
+date:   2018-01-19 13:00:00 +0300
 categories: things
 sitemap:
     priority: 0.7
     changefreq: 'monthly'
-    lastmod: 2018-01-19 07:00:00 +0300
+    lastmod: 2018-01-19 13:00:00 +0300
 ---
 
 
